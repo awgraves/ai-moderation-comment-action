@@ -26,7 +26,7 @@ async function fetch() {
 
 async function main() {
   // attempt file read
-  fs.readFile("content/subdir/new_doc_three.md", (error, data) => {
+  fs.readFile("content/subdir/new_doc_three.md", "utf-8", (error, data) => {
     if (error) {
       console.error(error);
       return;
