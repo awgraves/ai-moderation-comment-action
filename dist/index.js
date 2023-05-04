@@ -9916,15 +9916,19 @@ async function fetch() {
   return message;
 }
 
-try {
+async function main() {
   // file paths
   const filePaths = core.getInput("filepaths");
   const filePathsMessage = `filepaths: ${filePaths}`;
   console.log(filePathsMessage);
   core.setOutput("filepaths", filePaths);
-  const message = fetch();
+  const message = await fetch();
   console.log(`The message was: ${message}`);
   core.setOutput("message", message);
+}
+
+try {
+  main();
 } catch (error) {
   core.setFailed(error.message);
 }
