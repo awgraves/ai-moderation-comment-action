@@ -18,6 +18,7 @@ async function fetch() {
     max_tokens: 500,
   });
   const { message } = response.data.choices[0];
+  console.log(response);
   return message;
 }
 
