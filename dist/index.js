@@ -9916,25 +9916,23 @@ async function askOpenAI(fileContent) {
     max_tokens: 500,
   });
   const message = response.data.choices[0].text;
-  console.log(message);
   console.log(response);
-  return message;
+  console.log(`The message was: ${message}`);
+  core.setOutput("message", message);
 }
 
-function readFileContent(path) {
+function readFileContentAndAskAI(path) {
   // attempt file read
   console.log(`attempting to read file path: ${path}`);
-  let return_data;
-  fs.readFile(path, "utf-8", (error, data) => {
+  fs.readFile(path, "utf-8", async (error, data) => {
     if (error) {
       console.error(error);
       core.setFailed(error);
       return;
     }
     console.log(data);
-    return_data = data;
+    await askOpenAI(data);
   });
-  return return_data;
 }
 
 async function main() {
@@ -9952,11 +9950,10 @@ async function main() {
   }
 
   const selectedFile = allPaths[0];
-  const fileContent = readFileContent(selectedFile);
+  //const fileContent = readFileContent(selectedFile);
+  readFileContentAndAskAI(selectedFile);
 
-  const message = await askOpenAI(fileContent);
-  console.log(`The message was: ${message}`);
-  core.setOutput("message", message);
+  //const message = await askOpenAI(fileContent);
 }
 
 try {
