@@ -1,4 +1,5 @@
 const core = require("@actions/core");
+const fs = require("fs");
 //const github = require("@actions/github");
 
 const { Configuration, OpenAIApi } = require("openai");
@@ -24,6 +25,14 @@ async function fetch() {
 }
 
 async function main() {
+  // attempt file read
+  fs.readFile("content/subdir/new_doc_three.md", (error, data) => {
+    if (error) {
+      console.error(error);
+      return;
+    }
+    console.log(data);
+  });
   // file paths
   const filePaths = core.getInput("filepaths");
   const filePathsMessage = `filepaths: ${filePaths}`;

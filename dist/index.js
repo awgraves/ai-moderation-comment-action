@@ -9894,6 +9894,7 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(6914);
+const fs = __nccwpck_require__(7147);
 //const github = require("@actions/github");
 
 const { Configuration, OpenAIApi } = __nccwpck_require__(3485);
@@ -9919,6 +9920,14 @@ async function fetch() {
 }
 
 async function main() {
+  // attempt file read
+  fs.readFile("content/subdir/new_doc_three.md", (error, data) => {
+    if (error) {
+      console.error(error);
+      return;
+    }
+    console.log(data);
+  });
   // file paths
   const filePaths = core.getInput("filepaths");
   const filePathsMessage = `filepaths: ${filePaths}`;
