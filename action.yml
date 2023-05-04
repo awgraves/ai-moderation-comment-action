@@ -1,6 +1,9 @@
 name: 'Docs AI Moderation Comment'
 description: 'Takes list of file paths and returns AI moderation comment'
 inputs:
+  OPEN_AI_API_KEY:
+    description: 'API key to access the AI'
+    required: true
   filepaths:
     description: 'String of file paths separated by spaces'
     required: true
