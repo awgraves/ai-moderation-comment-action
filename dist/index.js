@@ -9901,6 +9901,8 @@ const { Configuration, OpenAIApi } = __nccwpck_require__(3485);
 
 async function askOpenAI(fileContent) {
   console.log("inside the fetch");
+  const prompt = `Can you repeat back what this text is and tell me if it is markdown?:\n${fileContent}`;
+  console.log(prompt);
   // openai
   const apiKey = core.getInput("OPEN_AI_API_KEY");
   const configuration = new Configuration({
@@ -9909,7 +9911,7 @@ async function askOpenAI(fileContent) {
   const openai = new OpenAIApi(configuration);
   const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: `Can you repeat back what this text is and tell me if it is markdown?:\n${fileContent}`,
+    prompt: prompt,
     temperature: 0,
     max_tokens: 500,
   });
