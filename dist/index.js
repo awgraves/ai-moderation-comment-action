@@ -9921,15 +9921,18 @@ async function askOpenAI(fileContent) {
 
 function readFileContent(path) {
   // attempt file read
-  console.log(`attempting to read file path:${path}`);
+  console.log(`attempting to read file path: ${path}`);
+  let return_data;
   fs.readFile(path, "utf-8", (error, data) => {
     if (error) {
       console.error(error);
+      core.setFailed(error);
       return;
     }
     console.log(data);
+    return_data = data;
   });
-  return data;
+  return return_data;
 }
 
 async function main() {
