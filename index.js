@@ -17,7 +17,7 @@ async function fetch() {
     temperature: 0,
     max_tokens: 500,
   });
-  const message = response.data.choices[0];
+  const message = response.data.choices[0].text;
   console.log(message);
   console.log(response);
   return message;
