@@ -6,7 +6,15 @@ const { Configuration, OpenAIApi } = require("openai");
 
 async function askOpenAI(fileContent) {
   console.log("inside the fetch");
-  const prompt = `Can you repeat back this text please?:\n${fileContent}`;
+  const prompt = `List all the ways that this file breaks the following rules:
+
+Rules:
+1. Do not use any h1 headers (in Markdown preceded by #).
+2. Markdown headers should be written in Title Case, which means all words in the header are capitalized. 
+3. Markdown headers should not exceed 5 words.
+4. Markdown headers should not include ending punctuation.
+5. The data for Title: and Description: should appear as single-quoted strings on the same line.
+6. All metadata fields must be present at the top of the file. Metadata fields are Title:, Description:, Subjects:, Tags:, CatalogContent:\n\nFile: ${fileContent}`;
   console.log(prompt);
   // openai
   const apiKey = core.getInput("OPEN_AI_API_KEY");
