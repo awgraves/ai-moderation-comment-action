@@ -9904,7 +9904,7 @@ async function askOpenAI(fileContent) {
   const prompt = `List all the ways that this file breaks the following rules:
 
 Rules:
-1. Do not use any h1 headers (in Markdown preceded by #).
+1. Do not use any h1 headers (in Markdown preceded by single #).
 2. Markdown headers should be written in Title Case, which means all words in the header are capitalized. 
 3. Markdown headers should not exceed 5 words.
 4. Markdown headers should not include ending punctuation.
