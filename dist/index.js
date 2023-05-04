@@ -9898,7 +9898,8 @@ const core = __nccwpck_require__(6914);
 
 const { Configuration, OpenAIApi } = __nccwpck_require__(3485);
 
-const fetch = async () => {
+async function fetch() {
+  console.log("inside the fetch");
   // openai
   const apiKey = core.getInput("OPEN_AI_API_KEY");
   const configuration = new Configuration({
@@ -9909,11 +9910,11 @@ const fetch = async () => {
     model: "text-davinci-003",
     prompt: "Tell me a knock knock joke.",
     temperature: 0,
-    max_tokens: 1000,
+    max_tokens: 500,
   });
   const { message } = response.data.choices[0];
   return message;
-};
+}
 
 try {
   // file paths
@@ -9922,6 +9923,7 @@ try {
   console.log(filePathsMessage);
   core.setOutput("filepaths", filePaths);
   const message = fetch();
+  console.log(`The message was: ${message}`);
   core.setOutput("message", message);
 } catch (error) {
   core.setFailed(error.message);
