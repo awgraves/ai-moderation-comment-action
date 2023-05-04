@@ -9913,7 +9913,7 @@ async function askOpenAI(fileContent) {
     model: "text-davinci-003",
     prompt: prompt,
     temperature: 0,
-    max_tokens: 500,
+    max_tokens: 1300,
   });
   const message = response.data.choices[0].text;
   console.log(response);
