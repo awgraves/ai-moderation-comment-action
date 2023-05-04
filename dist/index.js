@@ -9901,7 +9901,7 @@ const { Configuration, OpenAIApi } = __nccwpck_require__(3485);
 
 async function askOpenAI(fileContent) {
   console.log("inside the fetch");
-  const prompt = `Can you repeat back what this text is and tell me if it is markdown?:\n${fileContent}`;
+  const prompt = `Can you repeat back this text please?:\n${fileContent}`;
   console.log(prompt);
   // openai
   const apiKey = core.getInput("OPEN_AI_API_KEY");
