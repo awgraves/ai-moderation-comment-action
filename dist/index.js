@@ -9895,22 +9895,25 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(6914);
 const fs = __nccwpck_require__(7147);
-//const github = require("@actions/github");
 
 const { Configuration, OpenAIApi } = __nccwpck_require__(3485);
 
 async function askOpenAI(fileContent) {
-  console.log("inside the fetch");
-  const prompt = `List all the ways that this file breaks the following rules:
+  const prompt = `
+	List all the ways that this file breaks the following rules:
 
-Rules:
-1. Do not use any h1 headers (in Markdown preceded by single #).
-2. Markdown headers should be written in Title Case, which means all words in the header are capitalized. 
-3. Markdown headers should not exceed 5 words.
-4. Markdown headers should not include ending punctuation.
-5. The data for Title: and Description: should appear as single-quoted strings on the same line.
-6. All metadata fields must be present at the top of the file. Metadata fields are Title:, Description:, Subjects:, Tags:, CatalogContent:\n\nFile: ${fileContent}`;
+	Rules:
+	1. Do not use any h1 headers (in Markdown preceded by single #).
+	2. Markdown headers should be written in Title Case, which means all words in the header are capitalized. 
+	3. Markdown headers should not exceed 5 words.
+	4. Markdown headers should not include ending punctuation.
+	5. The data for Title and Description should appear as single-quoted strings on the same line.
+	6. All metadata fields must be present at the top of the file. Metadata fields are Title, Description, Subjects, Tags, CatalogContent
+
+	File: ${fileContent}`;
+
   console.log(prompt);
+
   // openai
   const apiKey = core.getInput("OPEN_AI_API_KEY");
   const configuration = new Configuration({
@@ -9930,7 +9933,6 @@ Rules:
 }
 
 function readFileContentAndAskAI(path) {
-  // attempt file read
   console.log(`attempting to read file path: ${path}`);
   fs.readFile(path, "utf-8", async (error, data) => {
     if (error) {
@@ -9950,7 +9952,7 @@ async function main() {
   console.log(filePathsMessage);
   core.setOutput("filepaths", filePaths);
 
-  // select just 1 file
+  // keeping it simple: limit to just 1 file for now
   const allPaths = filePaths.split(" ");
   if (allPaths.length === 0) {
     console.log("no file paths were found");
@@ -9958,10 +9960,7 @@ async function main() {
   }
 
   const selectedFile = allPaths[0];
-  //const fileContent = readFileContent(selectedFile);
   readFileContentAndAskAI(selectedFile);
-
-  //const message = await askOpenAI(fileContent);
 }
 
 try {
