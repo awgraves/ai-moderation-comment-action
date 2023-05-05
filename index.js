@@ -5,15 +5,12 @@ const { Configuration, OpenAIApi } = require("openai");
 
 async function askOpenAI(fileContent) {
   const prompt = `
-	List all the ways that this markdown file breaks the following rules:
-
-	Rules:
 	1. Do not use any markdown h1 headers.
 	2. Markdown headers should be written in Title Case, which means all words in the header are capitalized. 
 	3. Markdown headers should not exceed 5 words.
 	4. Markdown headers should not include ending punctuation.
-	5. The data for Title and Description should appear as single-quoted strings on the same line.
-	6. All metadata fields must be present at the top of the file. Metadata fields are Title, Description, Subjects, Tags, CatalogContent
+	5. The values corresponding to the Title and Description keys in the yaml section of the file (in between triple dash delimiters) should appear as single-quoted strings on the same line as their keys.
+	6. All metadata fields must be present at the top yaml section of the file (in between triple dash delimiters). Metadata fields are Title, Description, Subjects, Tags, CatalogContent
 
 	File: ${fileContent}`;
 
