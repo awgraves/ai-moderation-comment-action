@@ -9900,6 +9900,9 @@ const { Configuration, OpenAIApi } = __nccwpck_require__(3485);
 
 async function askOpenAI(fileContent) {
   const prompt = `
+	List all the ways this this markdown file breaks the following rules:
+
+	Rules:
 	1. Do not use any markdown h1 headers.
 	2. Markdown headers should be written in Title Case, which means all words in the header are capitalized. 
 	3. Markdown headers should not exceed 5 words.
